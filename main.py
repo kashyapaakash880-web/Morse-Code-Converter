@@ -49,7 +49,7 @@ def text_to_morse_code(text):
         if char in MORSE_CODE:
             result_text.append(MORSE_CODE[char])
         else:
-            result_text.append("Please Entry English Alphabet ")
+            result_text.append("?")
 
     return " ".join(result_text)
 
@@ -68,7 +68,7 @@ def morse_to_text(code):
             code_result.append(reversed_code[char])
 
         else:
-            code_result.append("Please Entry the Morse Code eg. --... --... / .- .- -.- ... ....")
+            code_result.append("?")
 
 
     return " ".join(code_result)
