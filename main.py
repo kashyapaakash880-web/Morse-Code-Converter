@@ -42,70 +42,104 @@ MORSE_CODE = {
 
 
 def text_to_morse_code(text):
+    """Convert normal text into Morse code."""
 
-    result_text = []
+    text = text.upper()
 
-    for char in text.upper():
-        if char in MORSE_CODE:
-            result_text.append(MORSE_CODE[char])
-        else:
-            result_text.append("Please write the English alphabet without using symbols")
+    invalid_characters = []
 
-    return " ".join(result_text)
+    for char in text:
+        if char not in MORSE_CODE:
+            invalid_characters.append(char)
+
+    if invalid_characters:
+        return f"Invalid character(s): {' '.join(invalid_characters)}"
+
+    result = []
+
+    for char in text:
+        result.append(MORSE_CODE[char])
+
+    return " ".join(result)
 
 
 def morse_to_text(code):
+    """Convert Morse code into normal text."""
 
     reversed_code = {
-        value : key for (key, value) in MORSE_CODE.items()
+        value: key
+        for key, value in MORSE_CODE.items()
+        if key != " "
     }
 
-    code_result = []
+    # Separate words using /
+    words = code.strip().split(" / ")
 
-    for char in code.split(" "):
+    decoded_words = []
 
-        if char in reversed_code:
-            code_result.append(reversed_code[char])
+    for word in words:
+
+        letters = word.split()
+
+        decoded_word = []
+
+        for letter in letters:
+
+            if letter in reversed_code:
+                decoded_word.append(reversed_code[letter])
+
+            else:
+                return f"Invalid Morse Code: {letter}"
+
+        decoded_words.append("".join(decoded_word))
+
+    return " ".join(decoded_words)
+
+
+def main():
+
+    while True:
+
+        print("\n===== MORSE CODE CONVERTER =====")
+        print("Welcome to the place where you can convert text into Morse code")
+        print("or Morse code into text.")
+
+        print("\nYour Options:")
+        print("1. Text → Morse")
+        print("2. Morse → Text")
+        print("3. Exit")
+
+        choice = input("\nChoose an option: ")
+
+        if choice == "1":
+
+            text_msg = input("\nEnter your text: ")
+
+            result = text_to_morse_code(text_msg)
+
+            print(f"\nMorse Code: {result}")
+
+        elif choice == "2":
+
+            code_msg = input("\nEnter your Morse Code: ")
+
+            result = morse_to_text(code_msg)
+
+            print(f"\nText: {result}")
+
+        elif choice == "3":
+
+            print(
+                "\nThank you for using Morse Code Converter! "
+                "Hope you have a good day ahead 😎🙌"
+            )
+
+            break
 
         else:
-            code_result.append("try again write Morse Code")
 
-    return ' '.join(code_result)
-
-
-while True:
-    print("\n===== MORSE CODE CONVERTER =====")
-    print("Welcome to the place where you convert text into Morse code or Morse code into text ")
-    print("Your Option are :")
-    print("1. Text → Morse")
-    print("2. Morse → Text")
-    print("3. Exit")
-    choice = input("Choose an option: ")
-
-    if choice == "1":
-
-        text_msg = input("Enter your text: ")
-        result_1 = text_to_morse_code(text_msg)
-        print(f"Morse Code: {result_1}")
-
-    elif choice == "2":
-
-        code_msg = input("Enter your Morse Code: ")
-        result_2 = morse_to_text(code_msg)
-        print(f"Text : {result_2}")
+            print("\nPlease enter a valid option: 1, 2, or 3.")
 
 
-    elif choice == "3":
-        print("Thank you for using Morse Code Converter Hope You have good day ahead 😎🙌")
-        break
-
-    else:
-        print("Please enter a valid option only 1 ,2 ,3 not 4 or 5 😥")
-
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    main()
