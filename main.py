@@ -49,7 +49,7 @@ def text_to_morse_code(text):
         if char in MORSE_CODE:
             result_text.append(MORSE_CODE[char])
         else:
-            result_text.append("?")
+            result_text.append("Please write the English alphabet without using symbols")
 
     return " ".join(result_text)
 
@@ -68,16 +68,15 @@ def morse_to_text(code):
             code_result.append(reversed_code[char])
 
         else:
-            code_result.append("?")
+            code_result.append("try again write Morse Code")
 
-
-    return " ".join(code_result)
+    return ' '.join(code_result)
 
 
 while True:
     print("\n===== MORSE CODE CONVERTER =====")
-    print("=== Welcome to the place where you convert text into Morse code or Morse code into text ===")
-    print("=== Your Option are : ===")
+    print("Welcome to the place where you convert text into Morse code or Morse code into text ")
+    print("Your Option are :")
     print("1. Text → Morse")
     print("2. Morse → Text")
     print("3. Exit")
@@ -93,7 +92,7 @@ while True:
 
         code_msg = input("Enter your Morse Code: ")
         result_2 = morse_to_text(code_msg)
-        print(f"Text Message : {result_2}")
+        print(f"Text : {result_2}")
 
 
     elif choice == "3":
@@ -101,7 +100,7 @@ while True:
         break
 
     else:
-        print("Please enter a valid option 😥")
+        print("Please enter a valid option only 1 ,2 ,3 not 4 or 5 😥")
 
 
 
