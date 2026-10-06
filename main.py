@@ -1,59 +1,34 @@
 MORSE_CODE = {
-    "A": ".-",
-    "B": "-...",
-    "C": "-.-.",
-    "D": "-..",
-    "E": ".",
-    "F": "..-.",
-    "G": "--.",
-    "H": "....",
-    "I": "..",
-    "J": ".---",
-    "K": "-.-",
-    "L": ".-..",
-    "M": "--",
-    "N": "-.",
-    "O": "---",
-    "P": ".--.",
-    "Q": "--.-",
-    "R": ".-.",
-    "S": "...",
-    "T": "-",
-    "U": "..-",
-    "V": "...-",
-    "W": ".--",
-    "X": "-..-",
-    "Y": "-.--",
-    "Z": "--..",
-
-    "0": "-----",
-    "1": ".----",
-    "2": "..---",
-    "3": "...--",
-    "4": "....-",
-    "5": ".....",
-    "6": "-....",
-    "7": "--...",
-    "8": "---..",
-    "9": "----.",
-
-    " ": "/"
+    'A': '.-',    'B': '-...',  'C': '-.-.',  'D': '-..',
+    'E': '.',     'F': '..-.',  'G': '--.',   'H': '....',
+    'I': '..',    'J': '.---',  'K': '-.-',   'L': '.-..',
+    'M': '--',    'N': '-.',    'O': '---',   'P': '.--.',
+    'Q': '--.-',  'R': '.-.',   'S': '...',   'T': '-',
+    'U': '..-',   'V': '...-',  'W': '.--',   'X': '-..-',
+    'Y': '-.--',  'Z': '--..',
+    '0': '-----', '1': '.----', '2': '..---', '3': '...--',
+    '4': '....-', '5': '.....', '6': '-....', '7': '--...',
+    '8': '---..', '9': '----.',
+    '.': '.-.-.-', ',': '--..--', '?': '..--..', "'": '.----.',
+    '!': '-.-.--', '/': '-..-.',  '(': '-.--.',  ')': '-.--.-',
+    '&': '.-...',  ':': '---...', ';': '-.-.-.', '=': '-...-',
+    '+': '.-.-.',  '-': '-....-', '_': '..--.-', '"': '.-..-.',
+    '$': '...-..-', '@': '.--.-.',
+    ' ': '/'          # Space Between words
 }
 
-
-def text_to_morse_code(text):
-    """Convert normal text into Morse code."""
+def text_to_morse(text):
 
     text = text.upper()
 
-    invalid_characters = []
+    invalid_chars = []
 
     for char in text:
         if char not in MORSE_CODE:
-            invalid_characters.append(char)
+            invalid_chars.append(char)
 
-    if invalid_characters:
-        return f"Invalid character(s): {' '.join(invalid_characters)}"
+    if invalid_chars:
+        return f"Invalid character: {''.join(invalid_chars)}"
 
     result = []
 
@@ -63,8 +38,7 @@ def text_to_morse_code(text):
     return " ".join(result)
 
 
-def morse_to_text(code):
-    """Convert Morse code into normal text."""
+def morse_to_text(morse_code : str) -> str:
 
     reversed_code = {
         value: key
@@ -72,8 +46,7 @@ def morse_to_text(code):
         if key != " "
     }
 
-    # Separate words using /
-    words = code.strip().split(" / ")
+    words = morse_code.strip().split(" / ")
 
     decoded_words = []
 
@@ -89,12 +62,11 @@ def morse_to_text(code):
                 decoded_word.append(reversed_code[letter])
 
             else:
-                return f"Invalid Morse Code: {letter}"
+                return f"Invalid code : {letter}"
 
         decoded_words.append("".join(decoded_word))
 
     return " ".join(decoded_words)
-
 
 def main():
 
@@ -115,7 +87,7 @@ def main():
 
             text_msg = input("\nEnter your text: ")
 
-            result = text_to_morse_code(text_msg)
+            result = text_to_morse(text_msg)
 
             print(f"\nMorse Code: {result}")
 
