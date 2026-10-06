@@ -52,11 +52,11 @@ def morse_to_text(morse_code : str) -> str:
 
     for word in words:
 
-        letter = word.split()
+        letters = word.split()
 
         decoded_word = []
 
-        for letter in letter:
+        for letter in letters:
 
             if letter in reversed_morse_code:
                 decoded_word.append(reversed_morse_code[letter])
