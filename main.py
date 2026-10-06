@@ -21,29 +21,29 @@ def text_to_morse(text):
 
     text = text.upper()
 
-    invalid_chars = []
+    invalid_characters = []
 
     for char in text:
+
         if char not in MORSE_CODE:
-            invalid_chars.append(char)
+            invalid_characters.append(char)
 
-    if invalid_chars:
-        return f"Invalid character: {''.join(invalid_chars)}"
+    if invalid_characters:
+        return f"Invalid character: {''.join(invalid_characters)}"
 
-    result = []
+    result_text = []
 
     for char in text:
-        result.append(MORSE_CODE[char])
+        result_text.append(MORSE_CODE[char])
 
-    return " ".join(result)
+    return " ".join(result_text)
 
 
 def morse_to_text(morse_code : str) -> str:
 
-    reversed_code = {
-        value: key
-        for key, value in MORSE_CODE.items()
-        if key != " "
+    reversed_morse_code = {
+        value: key for key, value in MORSE_CODE.items() if key != " "
+
     }
 
     words = morse_code.strip().split(" / ")
@@ -52,17 +52,17 @@ def morse_to_text(morse_code : str) -> str:
 
     for word in words:
 
-        letters = word.split()
+        letter = word.split()
 
         decoded_word = []
 
-        for letter in letters:
+        for letter in letter:
 
-            if letter in reversed_code:
-                decoded_word.append(reversed_code[letter])
+            if letter in reversed_morse_code:
+                decoded_word.append(reversed_morse_code[letter])
 
             else:
-                return f"Invalid code : {letter}"
+                return f"Invalid character: {letter}"
 
         decoded_words.append("".join(decoded_word))
 
